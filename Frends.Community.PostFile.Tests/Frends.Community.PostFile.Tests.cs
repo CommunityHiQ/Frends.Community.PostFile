@@ -33,7 +33,7 @@ namespace Frends.Community.PostFile.Tests
 
                 _stubHttp.Stub(x => x.Post("/endpoint"))
                     .AsContentType($"text/plain; charset={codePageName}")
-                    .Return("foo едц")
+                    .Return("foo пїЅпїЅпїЅ")
                     .OK();
 
                 var contentType = new Header { Name = "cONTENT-tYpE", Value = expectedContentType };
@@ -48,6 +48,7 @@ namespace Frends.Community.PostFile.Tests
                 //Casing should not affect setting header.
                 Assert.That(requestContentType, Is.EqualTo(expectedContentType));
                 Assert.That(requestBodyByteArray, Is.EqualTo(utf8ByteArray));
+                _stubHttp.Dispose();
             }
         }
     }
